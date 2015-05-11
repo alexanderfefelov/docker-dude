@@ -1,2 +1,3 @@
 # docker-dude
-The Dude (MikroTik) in a container
+
+[The Dude](http://www.mikrotik.com/thedude) (MikroTik) in a container
