@@ -2,7 +2,7 @@
 
 Just type
 
-    docker pull alexanderfefelov/dude
+    docker run alexanderfefelov/dude
 
 and your Dude is ready. You can stop it with
 
