@@ -2,10 +2,7 @@
 
 Just type
 
-    git clone https://github.com/alexanderfefelov/docker-dude.git
-    cd docker-dude
-    ./build.sh
-    ./run.sh
+    docker pull alexanderfefelov/dude
 
 and your Dude is ready. You can stop it with
 
