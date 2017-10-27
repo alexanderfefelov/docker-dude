@@ -1,6 +1,6 @@
 FROM phusion/baseimage
 
-VERSION=4.0beta3
+ENV VERSION 4.0beta3
 
 ENV DEBIAN_FRONTEND noninteractive
 WORKDIR /dude
