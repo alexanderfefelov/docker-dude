@@ -7,7 +7,7 @@
 
 Attention! This is a server container, not a client!
 
-Latest version of The Dude server for Windows is 4.0beta3.
+Last version of The Dude server for Windows is 4.0beta3.
 
 ```
 
