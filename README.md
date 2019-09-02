@@ -3,6 +3,14 @@
 [![](https://images.microbadger.com/badges/version/alexanderfefelov/dude.svg)](https://microbadger.com/images/alexanderfefelov/dude)
 [![](https://images.microbadger.com/badges/image/alexanderfefelov/dude.svg)](https://microbadger.com/images/alexanderfefelov/dude)
 
+```
+
+Attention! This is a server container, not a client!
+
+Latest version of The Dude server for Windows is 4.0beta3.
+
+```
+
 Just type
 
     docker run --name dude \
