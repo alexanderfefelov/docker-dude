@@ -13,8 +13,8 @@ Last version of The Dude server for Windows is 4.0beta3.
 
 Just type
 
-    docker run --name dude \
-      --privileged \
+    docker run \
+      --name dude \
       --detach \
       --volume /etc/localtime:/etc/localtime:ro \
       --volume dude:/dude \
