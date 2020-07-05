@@ -20,6 +20,7 @@ Just type
       --publish 2211:2211 \
       --publish 2210:2210 \
       --publish 514:514/udp \
+      --log-opt max-size=10m --log-opt max-file=5 \
       alexanderfefelov/dude
 
 and your Dude is ready. You can stop it with
