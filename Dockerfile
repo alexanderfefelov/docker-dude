@@ -19,6 +19,4 @@ RUN dpkg --add-architecture i386 \
   && apt-get -qq clean \
   && rm --recursive --force /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-VOLUME /dude
-
 CMD ["/sbin/my_init"]
