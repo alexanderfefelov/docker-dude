@@ -10,6 +10,7 @@ RUN dpkg --add-architecture i386 \
   && add-apt-repository --yes ppa:ubuntu-wine/ppa \
   && apt-get -qq update \
   && apt-get -qq install --no-install-recommends \
+       netcat \
        p7zip-full \
        wine1.8 \
        xvfb \

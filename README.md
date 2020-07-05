@@ -21,6 +21,11 @@ Just type
       --publish 2211:2211 \
       --publish 2210:2210 \
       --publish 514:514/udp \
+      --health-cmd /healthcheck.sh \
+      --health-start-period 3s \
+      --health-interval 1m \
+      --health-timeout 1s \
+      --health-retries 3 \
       --log-opt max-size=10m --log-opt max-file=5 \
       alexanderfefelov/dude
 
