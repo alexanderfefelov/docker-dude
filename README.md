@@ -15,6 +15,7 @@ Just type
     docker run \
       --name dude \
       --detach \
+      --restart unless-stopped \
       --volume /etc/localtime:/etc/localtime:ro \
       --volume dude-data:/dude/data \
       --publish 2211:2211 \
