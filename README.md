@@ -3,7 +3,6 @@
 [![](https://images.microbadger.com/badges/version/alexanderfefelov/dude.svg)](https://microbadger.com/images/alexanderfefelov/dude)
 [![](https://images.microbadger.com/badges/image/alexanderfefelov/dude.svg)](https://microbadger.com/images/alexanderfefelov/dude)
 
-
 ```
 Attention! This is a server container, not a client!
 
@@ -17,7 +16,7 @@ Just type
       --name dude \
       --detach \
       --volume /etc/localtime:/etc/localtime:ro \
-      --volume dude:/dude \
+      --volume dude-data:/dude/data \
       --publish 2211:2211 \
       --publish 2210:2210 \
       --publish 514:514/udp \
