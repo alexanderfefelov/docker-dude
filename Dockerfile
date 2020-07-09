@@ -7,7 +7,6 @@ ENV DUDE_STUFF=dude-install-$DUDE_VERSION.exe
 COPY container/ /
 COPY installer/$DUDE_STUFF /
 
-ENV DEBIAN_FRONTEND noninteractive
 RUN dpkg --add-architecture i386 \
   && add-apt-repository --yes ppa:ubuntu-wine/ppa \
   && apt-get -qq update \
