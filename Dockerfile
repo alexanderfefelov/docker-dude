@@ -1,9 +1,11 @@
 FROM phusion/baseimage:0.10.2
 
-ENV VERSION 4.0beta3
+ENV DUDE_VERSION 4.0beta3
+
+ENV DUDE_STUFF=dude-install-$DUDE_VERSION.exe
 
 COPY container/ /
-COPY installer/dude-install-$VERSION.exe /
+COPY installer/$DUDE_STUFF /
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN dpkg --add-architecture i386 \
@@ -14,9 +16,9 @@ RUN dpkg --add-architecture i386 \
        p7zip-full \
        wine1.8 \
        xvfb \
-  && 7z x -o/dude /dude-install-$VERSION.exe \
+  && 7z x -o/dude /$DUDE_STUFF \
   && chmod +x /dude/dude.exe \
-  && rm /dude-install-$VERSION.exe \
+  && rm /$DUDE_STUFF \
   && apt-get -qq clean \
   && rm --recursive --force /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
