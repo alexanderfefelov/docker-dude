@@ -15,6 +15,7 @@ RUN dpkg --add-architecture i386 \
        p7zip-full \
        wine1.8 \
        xvfb \
+       > /dev/null \
   && 7z x -o/dude /$DUDE_STUFF \
   && chmod +x /dude/dude.exe \
   && rm /$DUDE_STUFF \
