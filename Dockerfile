@@ -18,8 +18,8 @@ RUN dpkg --add-architecture i386 \
        > /dev/null \
   && 7z x -o/dude /$DUDE_STUFF > /dev/null \
   && chmod +x /dude/dude.exe \
-  && rm /$DUDE_STUFF \
   && apt-get -qq clean \
-  && rm --recursive --force /var/lib/apt/lists/* /tmp/* /var/tmp/*
+  && rm --recursive --force /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+  && rm --force /$DUDE_STUFF
 
 CMD ["/sbin/my_init"]
