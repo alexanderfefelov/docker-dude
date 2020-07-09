@@ -16,7 +16,7 @@ RUN dpkg --add-architecture i386 \
        wine1.8 \
        xvfb \
        > /dev/null \
-  && 7z x -o/dude /$DUDE_STUFF \
+  && 7z x -o/dude /$DUDE_STUFF > /dev/null \
   && chmod +x /dude/dude.exe \
   && rm /$DUDE_STUFF \
   && apt-get -qq clean \
