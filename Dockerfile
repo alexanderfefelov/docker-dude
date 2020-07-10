@@ -1,6 +1,6 @@
 FROM phusion/baseimage:0.10.2
 
-ENV DUDE_VERSION 4.0beta3
+ENV DUDE_VERSION=4.0beta3
 
 ENV DUDE_STUFF=dude-install-$DUDE_VERSION.exe
 
