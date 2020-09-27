@@ -1,4 +1,4 @@
-FROM phusion/baseimage:0.10.2
+FROM ubuntu:20.04
 
 ENV DUDE_VERSION=4.0beta3
 
@@ -8,12 +8,11 @@ COPY container/ /
 COPY installer/$DUDE_STUFF /
 
 RUN dpkg --add-architecture i386 \
-  && add-apt-repository --yes ppa:ubuntu-wine/ppa \
   && apt-get -qq update \
-  && apt-get -qq install --no-install-recommends \
+  && apt-get -qq --option APT::Immediate-Configure=false install --no-install-recommends \
        netcat \
        p7zip-full \
-       wine1.8 \
+       wine32 \
        xvfb \
        > /dev/null \
   && 7z x -o/dude /$DUDE_STUFF > /dev/null \
@@ -22,4 +21,6 @@ RUN dpkg --add-architecture i386 \
   && rm --recursive --force /var/lib/apt/lists/* /tmp/* /var/tmp/* \
   && rm --force /$DUDE_STUFF
 
-CMD ["/sbin/my_init"]
+WORKDIR /dude
+
+CMD ["/dude.sh"]
