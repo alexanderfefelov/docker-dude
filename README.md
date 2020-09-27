@@ -1,3 +1,5 @@
+# docker-dude
+
 [![Docker Pulls](https://img.shields.io/docker/pulls/alexanderfefelov/dude.svg)](https://hub.docker.com/r/alexanderfefelov/dude)
 [![Docker Stars](https://img.shields.io/docker/stars/alexanderfefelov/dude.svg)](https://hub.docker.com/r/alexanderfefelov/dude)
 [![](https://images.microbadger.com/badges/version/alexanderfefelov/dude.svg)](https://microbadger.com/images/alexanderfefelov/dude)
@@ -17,6 +19,7 @@ Just type
       --detach \
       --restart unless-stopped \
       --volume /etc/localtime:/etc/localtime:ro --volume /etc/timezone:/etc/timezone:ro \
+      --volume dude:/dude/data \
       --publish 2211:2211 \
       --publish 2210:2210 \
       --publish 514:514/udp \
@@ -31,3 +34,13 @@ and your Dude is ready. You can stop it with
 and run it again with
 
     docker start dude
+
+## Where is my data?
+
+    docker volume inspect --format '{{ .Mountpoint }}' dude
+
+## Uninstall
+
+    docker rm --force dude
+    docker image rm alexanderfefelov/dude
+    docker volume rm dude
