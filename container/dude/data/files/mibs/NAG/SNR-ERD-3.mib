@@ -1,0 +1,562 @@
+SNR-ERD-3 DEFINITIONS ::= BEGIN
+
+IMPORTS
+	MODULE-IDENTITY, OBJECT-IDENTITY, OBJECT-TYPE, NOTIFICATION-TYPE
+		FROM SNMPv2-SMI
+	enterprises, IpAddress, Counter					
+		FROM RFC1155-SMI
+	DisplayString
+		FROM RFC1213-MIB
+	NOTIFICATION-GROUP
+		FROM SNMPv2-CONF
+	; 
+
+snr MODULE-IDENTITY
+	LAST-UPDATED	"201504291200Z"
+	ORGANIZATION	"NAG "
+	CONTACT-INFO	"erd@nag.ru"
+	DESCRIPTION
+		"The MIB module for SNR-ERD"
+	REVISION		"201504291200Z"
+	DESCRIPTION
+		"Initial revision." 
+	::= { enterprises 40418 }
+
+
+snr-erd		OBJECT IDENTIFIER	::= { snr 2 }
+snr-erd-3	OBJECT IDENTIFIER	::= { snr-erd 3}
+ipAddressEntry	OBJECT IDENTIFIER	::= { snr-erd-3 1 }
+resetsSet	OBJECT IDENTIFIER	::= { snr-erd-3 2 }
+sensesSet1	OBJECT IDENTIFIER	::= { snr-erd-3 3 }
+sensesSet2	OBJECT IDENTIFIER	::= { snr-erd-3 4 }
+commS		OBJECT IDENTIFIER	::= { snr-erd-3 5 }
+
+temperatureSensorsOut	OBJECT IDENTIFIER	::= { sensesSet2 2 }
+
+erd3Traps	OBJECT IDENTIFIER	::= { snr-erd-3 0 }
+
+-- Traps
+
+temperatureSensorAlarm		NOTIFICATION-TYPE
+	STATUS		current
+	DESCRIPTION	"Check the text of message"		
+::= { erd3Traps 0 }
+
+temperatureSensorRelease	NOTIFICATION-TYPE
+	STATUS		current
+	DESCRIPTION	"Check the text of message"		
+::= { erd3Traps 1 }
+
+signal1Contact5Alarm		NOTIFICATION-TYPE
+	STATUS		current
+	DESCRIPTION	"Check the text of message"		
+::= { erd3Traps 2 }
+
+signal1Contact5Ok			NOTIFICATION-TYPE
+	STATUS		current
+	DESCRIPTION	"Check the text of message"		
+::= { erd3Traps 3 }
+
+signal2Contact6Alarm		NOTIFICATION-TYPE
+	STATUS		current
+	DESCRIPTION	"Check the text of message"		
+::= { erd3Traps 4 }
+
+signal2Contact6Ok			NOTIFICATION-TYPE
+	STATUS		current
+	DESCRIPTION	"Check the text of message"		
+::= { erd3Traps 5 }
+
+voltageSignal1Alarm			NOTIFICATION-TYPE
+	STATUS		current
+	DESCRIPTION	"Check the text of message"		
+::= { erd3Traps 6 }
+
+voltageSignal1Ok			NOTIFICATION-TYPE
+	STATUS		current
+	DESCRIPTION	"Check the text of message"		
+::= { erd3Traps 7 }
+
+voltageSignal2Alarm			NOTIFICATION-TYPE
+	STATUS		current
+	DESCRIPTION	"Check the text of message"		
+::= { erd3Traps 8 }
+
+voltageSignal2Ok			NOTIFICATION-TYPE
+	STATUS		current
+	DESCRIPTION	"Check the text of message"		
+::= { erd3Traps 9 }
+
+anySensorSignal1contact2Alarm	NOTIFICATION-TYPE
+	STATUS		current
+	DESCRIPTION	"Check the text of message"		
+::= { erd3Traps 10 }
+
+anySensorSignal1contact2Ok		NOTIFICATION-TYPE
+	STATUS		current
+	DESCRIPTION	"Check the text of message"		
+::= { erd3Traps 11 }
+
+anySensorSignal2contact3Alarm	NOTIFICATION-TYPE
+	STATUS		current
+	DESCRIPTION	"Check the text of message"		
+::= { erd3Traps 12 }
+
+anySensorSignal2contact3Ok		NOTIFICATION-TYPE
+	STATUS		current
+	DESCRIPTION	"Check the text of message"		
+::= { erd3Traps 13 }
+
+anySensorSignal3contact4Alarm	NOTIFICATION-TYPE
+	STATUS		current
+	DESCRIPTION	"Check the text of message"		
+::= { erd3Traps 14 }
+
+anySensorSignal3contact4Ok		NOTIFICATION-TYPE
+	STATUS		current
+	DESCRIPTION	"Check the text of message"		
+::= { erd3Traps 15 }
+
+voltage1Alarm					NOTIFICATION-TYPE
+	STATUS		current
+	DESCRIPTION	"Check the text of message"		
+::= { erd3Traps 16 }
+
+voltage1Ok						NOTIFICATION-TYPE
+	STATUS		current
+	DESCRIPTION	"Check the text of message"		
+::= { erd3Traps 17 }
+
+voltage2Alarm					NOTIFICATION-TYPE
+	STATUS		current
+	DESCRIPTION	"Check the text of message"		
+::= { erd3Traps 18 }
+
+voltage2Ok						NOTIFICATION-TYPE
+	STATUS		current
+	DESCRIPTION	"Check the text of message"		
+::= { erd3Traps 19 }
+
+remoteControlContact8On			NOTIFICATION-TYPE
+	STATUS		current
+	DESCRIPTION	"Check the text of message"		
+::= { erd3Traps 20 }
+
+remoteControlContact8Off		NOTIFICATION-TYPE
+	STATUS		current
+	DESCRIPTION	"Check the text of message"		
+::= { erd3Traps 21 }
+
+resetedSmartContact7			NOTIFICATION-TYPE
+	STATUS		current
+	DESCRIPTION	"Check the text of message"		
+::= { erd3Traps 22 }
+
+temperatureSensorOutAlarm		NOTIFICATION-TYPE
+	STATUS		current
+	DESCRIPTION	"Check the text of message"		
+::= { erd3Traps 23 }
+
+temperatureSensorOutRelease		NOTIFICATION-TYPE
+	STATUS		current
+	DESCRIPTION	"Check the text of message"		
+::= { erd3Traps 24 }
+
+temperatureSensorOutFail		NOTIFICATION-TYPE
+	STATUS		current
+	DESCRIPTION	"Check the text of message"		
+::= { erd3Traps 25 }
+
+temperatureSensorOutOk			NOTIFICATION-TYPE
+	STATUS		current
+	DESCRIPTION	"Check the text of message"		
+::= { erd3Traps 26 }
+
+erd3TrapGroup					NOTIFICATION-GROUP
+	NOTIFICATIONS 
+	{
+		temperatureSensorAlarm,
+		temperatureSensorRelease,   
+		signal1Contact5Alarm,
+
+		signal1Contact5Ok,
+		signal2Contact6Alarm,
+
+		signal2Contact6Ok,
+		voltageSignal1Alarm,
+		voltageSignal1Ok,
+		voltageSignal2Alarm,
+		voltageSignal2Ok,
+		anySensorSignal1contact2Alarm,
+		anySensorSignal1contact2Ok,
+		anySensorSignal2contact3Alarm,
+		anySensorSignal2contact3Ok,
+		anySensorSignal3contact4Alarm,
+		anySensorSignal3contact4Ok,
+		voltage1Alarm,
+		voltage1Ok,
+		voltage2Alarm,
+		voltage2Ok,
+		remoteControlContact8On,
+		remoteControlContact8Off,
+		resetedSmartContact7,
+		temperatureSensorOutAlarm,
+		temperatureSensorOutRelease,
+		temperatureSensorOutFail,
+		temperatureSensorOutOk
+	}
+  
+	STATUS current
+
+	DESCRIPTION
+
+		" "
+
+::= { snr-erd-3 99 }
+
+
+-- ipAddressEntry
+
+ipAddress		OBJECT-TYPE
+	SYNTAX		IpAddress
+        MAX-ACCESS	read-write
+        STATUS		current
+        DESCRIPTION	"myIp"
+::= {ipAddressEntry 1}
+
+ipGatewayAddress	OBJECT-TYPE
+	SYNTAX		IpAddress
+	MAX-ACCESS	read-write
+	STATUS		current
+	DESCRIPTION	"DGIp"
+::= {ipAddressEntry 2}
+
+ipMonitoringDevice	OBJECT-TYPE
+	SYNTAX		IpAddress
+        MAX-ACCESS	read-write 
+        STATUS		current
+        DESCRIPTION	"monitoredIP"
+::= {ipAddressEntry 3}
+
+ipForTrap		OBJECT-TYPE
+	SYNTAX		IpAddress 
+	MAX-ACCESS	read-write
+	STATUS		current
+	DESCRIPTION	"ipForTrap"
+::= {ipAddressEntry 4}
+
+
+-- resetsSet
+
+resetSmartContact7	OBJECT-TYPE
+	SYNTAX		INTEGER  
+			{
+				reset	(1),
+				bypass	(0)
+			}
+	MAX-ACCESS	read-write
+	STATUS		current
+	DESCRIPTION	"qwerty"    
+::= { resetsSet 1}
+
+numberOfResetPositives	OBJECT-TYPE
+	SYNTAX		INTEGER {resetPositives (0)}
+	MAX-ACCESS	read-write
+	STATUS		current
+	DESCRIPTION	"qwerty"
+::= { resetsSet 2 }
+
+
+remoteControlContact8	OBJECT-TYPE
+	SYNTAX		INTEGER 
+			{
+				termostatSetON	(3),
+				switch			(4),
+				manualSetON		(2),
+				manOFF			(1),
+				manON			(0),
+				autoOFF		(6),
+				autoON			(5) 
+			}
+	MAX-ACCESS	read-write
+	STATUS		current
+	DESCRIPTION	"qwerty"
+::= { resetsSet 3 }
+
+
+-- sensesSet1
+
+monitorAlarmSignal1Contact5	OBJECT-TYPE
+	SYNTAX			INTEGER 
+				{
+					sensorOn	(3),
+					doorIsClose	(1),
+					doorIsOpen	(2),       
+					sensorOff	(0)
+				}
+	MAX-ACCESS		read-write
+	STATUS			current
+	DESCRIPTION		"qwerty"
+::= { sensesSet1 1}
+
+monitorAlarmSignal2Contact6	OBJECT-TYPE
+	SYNTAX			INTEGER 
+				{
+					sensorOn	(3),
+					doorIsClose	(1),
+					doorIsOpen	(2),       
+					sensorOff	(0)
+				}
+	MAX-ACCESS		read-write
+	STATUS			current
+	DESCRIPTION		"qwerty"
+::= { sensesSet1 2 }
+
+numberOfAlarmPositives		OBJECT-TYPE
+	SYNTAX			INTEGER {resetPositives (0)}
+	MAX-ACCESS		read-write
+	STATUS			current
+	DESCRIPTION		"qwerty"
+::= { sensesSet1 3 }
+
+monitorAnySensorSignal1contact2	OBJECT-TYPE
+	SYNTAX			INTEGER 
+				{
+					sensorOn	(3),
+					sensorIs0	(1),
+					sensorIs1	(2),       
+					sensorOff	(0)
+				}
+	MAX-ACCESS		read-write
+	STATUS			current
+	DESCRIPTION		"qwerty"
+::= { sensesSet1 4 }
+
+monitorAnySensorSignal2contact3	OBJECT-TYPE
+	SYNTAX			INTEGER 
+				{
+					sensorOn	(3),
+					sensorIs0	(1),
+					sensorIs1	(2),       
+					sensorOff	(0)
+				}
+	MAX-ACCESS		read-write
+	STATUS			current
+	DESCRIPTION		"qwerty"
+::= { sensesSet1 5 }
+
+monitorAnySensorSignal3contact4	OBJECT-TYPE
+	SYNTAX			INTEGER 
+				{
+					sensorOn	(3),
+					sensorIs0	(1),
+					sensorIs1	(2),       
+					sensorOff	(0)
+				}
+	MAX-ACCESS		read-write
+	STATUS			current
+	DESCRIPTION		"qwerty"
+::= { sensesSet1 6 }
+
+monitorVoltageSignal1		OBJECT-TYPE
+	SYNTAX			INTEGER 
+				{
+					sensorOn	(3),
+					voltageIsYes	(2),
+					voltageIsNo	(1),       
+					sensorOff	(0)
+				}
+	MAX-ACCESS		read-write
+	STATUS			current
+	DESCRIPTION		"qwerty"
+::= { sensesSet1 7 }
+
+monitorVoltageSignal2		OBJECT-TYPE
+	SYNTAX			INTEGER 
+				{
+					sensorOn(3),
+					voltageIsYes (2),
+					voltageIsNo (1),       
+					sensorOff (0)
+				}
+	MAX-ACCESS		read-write
+	STATUS			current
+	DESCRIPTION		"qwerty"
+::= { sensesSet1 8 }
+
+
+-- sensesSet2
+
+temperatureSensor		OBJECT-TYPE
+	SYNTAX			INTEGER 
+	MAX-ACCESS		read-only
+	STATUS			current
+	DESCRIPTION		"qwerty"
+::= { sensesSet2 1 }
+
+
+temperatureSensorOutSerial1	OBJECT-TYPE
+	SYNTAX			OCTET STRING
+	MAX-ACCESS		read-only
+	STATUS			current
+	DESCRIPTION		"qwerty"
+::= { temperatureSensorsOut 1 }
+
+temperatureSensorOut1		OBJECT-TYPE
+	SYNTAX			INTEGER
+	MAX-ACCESS		read-only
+	STATUS			current
+	DESCRIPTION		"qwerty"
+::= { temperatureSensorsOut 2 }
+
+temperatureSensorOutSerial2	OBJECT-TYPE
+	SYNTAX			OCTET STRING
+	MAX-ACCESS		read-only
+	STATUS			current
+	DESCRIPTION		"qwerty"
+::= { temperatureSensorsOut 3 }
+
+temperatureSensorOut2		OBJECT-TYPE
+	SYNTAX			INTEGER
+	MAX-ACCESS		read-only
+	STATUS			current
+	DESCRIPTION		"qwerty"
+::= { temperatureSensorsOut 4 }
+
+temperatureSensorOutSerial3	OBJECT-TYPE
+	SYNTAX			OCTET STRING
+	MAX-ACCESS		read-only
+	STATUS			current
+	DESCRIPTION		"qwerty"
+::= { temperatureSensorsOut 5 }
+
+temperatureSensorOut3		OBJECT-TYPE
+	SYNTAX			INTEGER
+	MAX-ACCESS		read-only
+	STATUS			current
+	DESCRIPTION		"qwerty"
+::= { temperatureSensorsOut 6 }
+
+temperatureSensorOutSerial4	OBJECT-TYPE
+	SYNTAX			OCTET STRING
+	MAX-ACCESS		read-only
+	STATUS			current
+	DESCRIPTION		"qwerty"
+::= { temperatureSensorsOut 7 }
+
+temperatureSensorOut4		OBJECT-TYPE
+	SYNTAX			INTEGER
+	MAX-ACCESS		read-only
+	STATUS			current
+	DESCRIPTION		"qwerty"
+::= { temperatureSensorsOut 8 }
+
+temperatureSensorOutSerial5	OBJECT-TYPE
+	SYNTAX			OCTET STRING
+	MAX-ACCESS		read-only
+	STATUS			current
+	DESCRIPTION		"qwerty"
+::= { temperatureSensorsOut 9 }
+
+temperatureSensorOut5		OBJECT-TYPE
+	SYNTAX			INTEGER
+	MAX-ACCESS		read-only
+	STATUS			current
+	DESCRIPTION		"qwerty"
+::= { temperatureSensorsOut 10 }
+
+voltageSensor1Contact10		OBJECT-TYPE
+	SYNTAX			INTEGER 
+	MAX-ACCESS		read-only
+	STATUS			current
+	DESCRIPTION		"qwerty"
+::= { sensesSet2 3 }
+
+sysVoltageAlarm			OBJECT-TYPE
+	SYNTAX			INTEGER 
+	MAX-ACCESS		read-write
+	STATUS			current
+	DESCRIPTION		"qwerty"
+::= { sensesSet2 4 }
+
+voltageSensor2Contact11		OBJECT-TYPE
+	SYNTAX			INTEGER
+	MAX-ACCESS		read-only
+	STATUS			current
+	DESCRIPTION		"qwerty"
+::= { sensesSet2 5 }
+
+sysVoltage2Alarm		OBJECT-TYPE
+	SYNTAX			INTEGER 
+	MAX-ACCESS		read-write
+	STATUS			current
+	DESCRIPTION		"qwerty"
+::= { sensesSet2 6 }
+
+
+-- commS
+
+communityString		OBJECT-TYPE
+	SYNTAX		DisplayString (SIZE(0..10))
+	MAX-ACCESS	read-write
+	STATUS		current
+	DESCRIPTION	"qwerty"
+::= {commS 1}
+
+trapMode		OBJECT-TYPE
+	SYNTAX		INTEGER 
+			{
+				once		(1),      
+				cyclically	(0)
+			}
+	MAX-ACCESS	read-write
+	STATUS		current
+	DESCRIPTION	"qwerty"
+::= {commS 2}
+
+alarmSense1Name		OBJECT-TYPE
+	SYNTAX		DisplayString (SIZE(0..10))
+	MAX-ACCESS	read-write
+	STATUS		current
+	DESCRIPTION	"qwerty"
+::= {commS 3}
+
+alarmSense2Name		OBJECT-TYPE
+	SYNTAX		DisplayString (SIZE(0..10))
+	MAX-ACCESS	read-write
+	STATUS		current
+	DESCRIPTION	"qwerty"
+::= {commS 4}
+
+userSense1Name		OBJECT-TYPE
+	SYNTAX		DisplayString (SIZE(0..10))
+	MAX-ACCESS	read-write
+	STATUS		current
+	DESCRIPTION	"qwerty"
+::= {commS 5}
+
+userSense2Name		OBJECT-TYPE
+	SYNTAX		DisplayString (SIZE(0..10))
+	MAX-ACCESS	read-write
+	STATUS		current
+	DESCRIPTION	"qwerty"
+::= {commS 6}
+
+userSense3Name		OBJECT-TYPE
+	SYNTAX		DisplayString (SIZE(0..10))
+	MAX-ACCESS	read-write
+	STATUS		current
+	DESCRIPTION	"qwerty"
+::= {commS 7}
+
+
+message			OBJECT-TYPE
+	SYNTAX		DisplayString (SIZE(0..10))
+	MAX-ACCESS	read-write
+	STATUS		current
+	DESCRIPTION	"Text trap message"
+::= {commS 10}
+
+
+END
+
