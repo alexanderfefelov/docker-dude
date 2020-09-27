@@ -4,7 +4,6 @@ ENV DUDE_VERSION=4.0beta3
 
 ENV DUDE_STUFF=dude-install-$DUDE_VERSION.exe
 
-COPY container/ /
 COPY installer/$DUDE_STUFF /
 
 RUN dpkg --add-architecture i386 \
@@ -15,11 +14,15 @@ RUN dpkg --add-architecture i386 \
        wine32 \
        xvfb \
        > /dev/null \
-  && 7z x -o/dude /$DUDE_STUFF > /dev/null \
+  && 7z x -o/dude \
+       -x!data/files/mibs/* \
+       /$DUDE_STUFF > /dev/null \
   && chmod +x /dude/dude.exe \
   && apt-get -qq clean \
   && rm --recursive --force /var/lib/apt/lists/* /tmp/* /var/tmp/* \
   && rm --force /$DUDE_STUFF
+
+COPY container/ /
 
 WORKDIR /dude
 
