@@ -17,6 +17,7 @@ RUN dpkg --add-architecture i386 \
   && 7z x -o/dude \
        -x!uninstall.exe \
        -x!data/files/*.ttf \
+       -x!data/files/images/* \
        -x!data/files/mibs/* \
        /$DUDE_STUFF > /dev/null \
   && chmod +x /dude/dude.exe \

@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 12.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 51448)  -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.0"
+   width="50"
+   height="50"
+   viewBox="0 0 339.6 330.8"
+   overflow="visible"
+   enable-background="new 0 0 339.6 330.8"
+   xml:space="preserve"
+   id="svg1599"
+   sodipodi:version="0.32"
+   inkscape:version="0.42+devel"
+   sodipodi:docname="pc.svg"
+   sodipodi:docbase="C:\Documents and Settings\Administrator\My Documents\ikonas\pareizi"><metadata
+   id="metadata1702"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs1700" /><sodipodi:namedview
+   inkscape:window-height="975"
+   inkscape:window-width="1280"
+   inkscape:pageshadow="2"
+   inkscape:pageopacity="0.0"
+   borderopacity="1.0"
+   bordercolor="#666666"
+   pagecolor="#ffffff"
+   id="base"
+   inkscape:zoom="1.1305925"
+   inkscape:cx="179.52941"
+   inkscape:cy="7.0759356"
+   inkscape:window-x="-4"
+   inkscape:window-y="-4"
+   inkscape:current-layer="svg1599" />
+<g
+   id="keyboard_1_">
+	<g
+   id="Shape_10">
+		<g
+   id="g1603">
+			<polygon
+   points="7.2,226 8.4,229.2 165.6,313.6 165.6,310 7.2,226 "
+   id="polygon1605"
+   style="fill:#bfbfbf" />
+		</g>
+	</g>
+	<g
+   id="Shape_11">
+		<g
+   id="g1608">
+			<polygon
+   points="165.549,310.102 165.6,313.427 174.602,304.304 205.104,270.849 206.774,263.549 165.549,310.102 "
+   id="polygon1610"
+   style="fill:#b7b7b7" />
+		</g>
+	</g>
+	<polyline
+   points="7.2,226 165.549,310.102 206.774,263.549 48.496,196.455  "
+   id="polyline1612"
+   style="fill:#ededed" />
+</g>
+<g
+   id="mouse_1_">
+	<g
+   id="Shape_12">
+		<g
+   id="g1616">
+			<path
+   d="M 189.2,319.6 L 230,278.8 C 189.2,266.8 180.736,306.52 189.2,319.6 z "
+   id="path1618"
+   style="fill:#eeeeee" />
+		</g>
+	</g>
+	<g
+   id="Shape_13">
+		<g
+   id="g1621">
+			<path
+   d="M 228.8,279.2 L 189.6,319.6 C 200,332.399 250.8,286.399 228.8,279.2 z "
+   id="path1623"
+   style="fill:#eeeeee" />
+		</g>
+	</g>
+	<g
+   id="Shape_14">
+		<g
+   id="g1626">
+			<path
+   d="M 215.6,275.2 C 198.545,280.885 224.434,294.22 236.8,286.8 C 240.8,284.399 216.8,274.8 215.6,275.2 z "
+   id="path1628"
+   style="fill:#afafaf" />
+		</g>
+	</g>
+	<g
+   id="Shape_15">
+		<g
+   id="g1631">
+			<path
+   d="M 237.2,285.6 C 237.2,285.6 233.703,291.729 229.456,297.392 C 225.305,302.927 220.4,308 220.4,308 L 210.4,316 L 204,319.6 L 193.6,322 C 208.401,329.2 235.6,299.2 237.201,292.8 C 238.8,286.399 237.2,285.6 237.2,285.6 z "
+   id="path1633"
+   style="fill:#b7b7b7" />
+		</g>
+	</g>
+</g>
+<g
+   id="monitor_1_">
+	<g
+   id="Shape_6">
+		<g
+   id="g1637">
+			<polygon
+   points="256.662,42.872 255.2,65.2 285.6,54 256.662,42.872 "
+   id="polygon1639"
+   style="fill:#cacaca" />
+		</g>
+	</g>
+	<g
+   id="Layer_8">
+		<linearGradient
+   id="XMLID_3_"
+   gradientUnits="userSpaceOnUse"
+   x1="111.7593"
+   y1="-5.3843002"
+   x2="201.4046"
+   y2="240.91431">
+			<stop
+   offset="0"
+   style="stop-color:#EAEAEA"
+   id="stop1643" />
+			<stop
+   offset="0.3491"
+   style="stop-color:#E7E7E7"
+   id="stop1645" />
+			<stop
+   offset="0.5711"
+   style="stop-color:#DFDFDF"
+   id="stop1647" />
+			<stop
+   offset="0.7576"
+   style="stop-color:#D0D0D0"
+   id="stop1649" />
+			<stop
+   offset="0.9236"
+   style="stop-color:#BBBBBB"
+   id="stop1651" />
+			<stop
+   offset="1"
+   style="stop-color:#AFAFAF"
+   id="stop1653" />
+		</linearGradient>
+		<polyline
+   points="59.6,13.6 245.2,42.8 220.4,234 60.828,173.122 59.6,13.6   "
+   id="polyline1655"
+   style="fill:url(#XMLID_3_)" />
+	</g>
+	<g
+   id="Shape_4">
+		<g
+   id="g1658">
+			<polygon
+   points="77.6,40 77.6,146.8 200.4,190 214,65.6 77.6,40 "
+   id="polygon1660"
+   style="fill:#313735" />
+		</g>
+	</g>
+	<g
+   id="Shape_7">
+		<g
+   id="g1663">
+			<polygon
+   points="79.6,11.6 59.6,13.6 245.2,42.8 256.8,40 79.6,11.6 "
+   id="polygon1665"
+   style="fill:#c6c6c6" />
+		</g>
+	</g>
+	<g
+   id="Shape_5">
+		<g
+   id="g1668">
+			<polygon
+   points="255.2,65.2 256.8,40 244.496,42.789 220.4,234 270.4,181.2 285.6,54 255.2,65.2 "
+   id="polygon1670"
+   style="fill:#b3b3b3" />
+		</g>
+	</g>
+	<g
+   id="Shape_8">
+		<g
+   id="g1673">
+			<path
+   d="M 116.4,194.399 C 111.6,227.2 182.8,235.2 193.6,223.2 L 116.4,194.399 z "
+   id="path1675"
+   style="fill:#d9d9d9" />
+		</g>
+	</g>
+</g>
+<g
+   id="Layer_11">
+	<polyline
+   points="236.4,126.4 267.995,135.955 259.662,270.788 234.8,259.6 236.4,126.4  "
+   id="polyline1678"
+   style="fill:#ededed" />
+</g>
+<g
+   id="Layer_9">
+	<linearGradient
+   id="XMLID_4_"
+   gradientUnits="userSpaceOnUse"
+   x1="236.73441"
+   y1="105.8721"
+   x2="335.8291"
+   y2="105.8721">
+		<stop
+   offset="0"
+   style="stop-color:#EAEAEA"
+   id="stop1682" />
+		<stop
+   offset="0.3491"
+   style="stop-color:#E7E7E7"
+   id="stop1684" />
+		<stop
+   offset="0.5711"
+   style="stop-color:#DFDFDF"
+   id="stop1686" />
+		<stop
+   offset="0.7576"
+   style="stop-color:#D0D0D0"
+   id="stop1688" />
+		<stop
+   offset="0.9236"
+   style="stop-color:#BBBBBB"
+   id="stop1690" />
+		<stop
+   offset="1"
+   style="stop-color:#AFAFAF"
+   id="stop1692" />
+	</linearGradient>
+	<polygon
+   points="236.734,126.4 268.329,135.955 335.829,82.455 307.829,75.789 236.734,126.4 "
+   id="polygon1694"
+   style="fill:url(#XMLID_4_)" />
+</g>
+<g
+   id="Layer_10">
+	<polygon
+   points="335.829,82.455 321.162,202.955 259.662,270.788 267.995,135.955 335.829,82.455 "
+   id="polygon1697"
+   style="fill:#bebebe" />
+</g>
+</svg>
