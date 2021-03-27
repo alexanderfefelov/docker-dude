@@ -1,0 +1,707 @@
+    TPLINK-POWER-OVER-ETHERNET-MIB DEFINITIONS ::= BEGIN
+
+        IMPORTS
+            MODULE-IDENTITY, OBJECT-TYPE, MODULE-IDENTITY, NOTIFICATION-TYPE
+                FROM SNMPv2-SMI
+			tplinkMgmt	          
+				FROM TPLINK-MIB;
+                        
+        tplinkPowerOverEthernetMIB MODULE-IDENTITY
+            LAST-UPDATED    "201307030000Z"
+            ORGANIZATION    "TP-LINK"
+            CONTACT-INFO    " www.tplink.com.cn"
+            DESCRIPTION     "Private MIB for PoE module."
+            REVISION        "201307030000Z"
+            DESCRIPTION     "Initial version of this MIB module."
+            ::= { tplinkMgmt 56 }
+			
+ -- (Top) SubNodes
+			tplinkPoeMIBObjects OBJECT IDENTIFIER ::= {tplinkPowerOverEthernetMIB 1}
+			tplinkPoeNotifications OBJECT IDENTIFIER ::= {tplinkPowerOverEthernetMIB 2}
+
+-------------- tplinkPoeMIBObjects Overview------------
+            tpPoeConfig              OBJECT IDENTIFIER ::= {tplinkPoeMIBObjects 1}  
+			tpPoeProfile              OBJECT IDENTIFIER ::= {tplinkPoeMIBObjects 2}  
+            tpPoeTimeRange       OBJECT IDENTIFIER ::= {tplinkPoeMIBObjects 3}
+        
+-- (1) tpPoeConfig Objects
+			tpPoeGlobal           OBJECT IDENTIFIER ::= {tpPoeConfig 1}  
+			tpPoePort             OBJECT IDENTIFIER ::= {tpPoeConfig 2}  
+			
+			tpSystemPowerLimit OBJECT-TYPE
+            SYNTAX  INTEGER(1..3200)
+            MAX-ACCESS  read-write
+            STATUS  current
+            DESCRIPTION
+                    "Define max power the PoE switch supply. The unit is 0.1W."
+            ::= { tpPoeGlobal 1 }
+            
+            tpPowerDisconnectMethod OBJECT-TYPE
+            SYNTAX  INTEGER
+                {
+                deny-lower-priority(1)                      
+                }
+            MAX-ACCESS  read-only
+            STATUS  current
+            DESCRIPTION
+                "The PoE Switch use this method to offset the power 
+                limit being exceeded and keep the switch system using 
+                power at a usable level."
+            ::= { tpPoeGlobal 2 } 
+            
+            tpSystemPowerConsumption OBJECT-TYPE
+            SYNTAX  INTEGER(1..3200)
+            MAX-ACCESS  read-only
+            STATUS  current
+            DESCRIPTION
+                    "Display the PoE switch's real time system power consumption. The unit is 0.1W."
+            ::= { tpPoeGlobal 3 }
+            
+            tpSystemPowerRemain OBJECT-TYPE
+            SYNTAX  INTEGER(1..3200)
+            MAX-ACCESS  read-only
+            STATUS  current
+            DESCRIPTION
+                    "Display the PoE switch's real time remaining system power. The unit is 0.1W."
+            ::= { tpPoeGlobal 4 }			
+			
+			tpPoePortConfigTable OBJECT-TYPE
+            SYNTAX  SEQUENCE OF POEPORTCONFIGENTRY
+            MAX-ACCESS  not-accessible
+            STATUS  current
+            DESCRIPTION
+                    "A list of PoE entries.
+                     Here you can configure the PoE feature on each port."
+            ::= { tpPoePort 1 }
+
+            tpPoePortConfigEntry OBJECT-TYPE
+            SYNTAX  POEPORTCONFIGENTRY
+            MAX-ACCESS  not-accessible
+            STATUS  current
+            DESCRIPTION
+                    "An entry contains of the configuration and information of poe port."
+            INDEX   { tpPoePortIndex  }
+            ::= { tpPoePortConfigTable 1 }
+    
+        POEPORTCONFIGENTRY ::=
+            SEQUENCE {        
+                                    
+                                tpPoePortIndex
+                                        INTEGER, 
+                                tpPoePortStatus
+                                        INTEGER,
+                                tpPoePriority
+                                        INTEGER,
+                                tpPoePowerLimit  
+                                        INTEGER, 
+                                tpPoePortTimeRangeName
+                                        OCTET STRING (SIZE (0..255)),
+                                tpPoePortProfileName
+                                        OCTET STRING (SIZE (0..255)),
+                                tpPoePower
+                                        INTEGER,
+                                tpPoeCurrent
+                                        INTEGER,
+                                tpPoeVoltage
+                                        INTEGER,
+                                tpPoeClass
+                                        INTEGER,
+                                tpPoePowerStatus
+                                        INTEGER            
+                }
+        tpPoePortIndex OBJECT-TYPE
+            SYNTAX  INTEGER  
+            MAX-ACCESS  read-only
+            STATUS  current
+            DESCRIPTION
+                    "The port number of the Switch."
+            ::= { tpPoePortConfigEntry 1 }
+        
+        tpPoePortStatus OBJECT-TYPE
+            SYNTAX  INTEGER{
+                disable(0),                         
+                enable(1)                       
+                }
+            MAX-ACCESS  read-write
+            STATUS  current
+            DESCRIPTION
+                    "Select to disable/enable the PoE feature
+                     for the corresponding port. If set enable,
+                     the corresponding port can supply power to
+                      the linked PD (Powered Device)."
+            ::= { tpPoePortConfigEntry 2 }
+       
+       tpPoePriority OBJECT-TYPE
+             SYNTAX  INTEGER{
+                high(0),                        
+                middle(1),
+                low(2)                      
+                }
+            MAX-ACCESS  read-write
+            STATUS  current
+            DESCRIPTION
+                    "Cooperates with the Power Disconnected Method
+                     to decide the way to supply power to the new 
+                     linked PD (Powered Device) when the surplus 
+                     power is inadequate."
+            ::= { tpPoePortConfigEntry 3 }
+       tpPoePowerLimit OBJECT-TYPE
+            SYNTAX  INTEGER(1..300)
+            MAX-ACCESS  read-write
+            STATUS  current
+            DESCRIPTION
+                    "Defines the max power the corresponding port can supply.The unit is 0.1W"
+            ::= { tpPoePortConfigEntry 4 }  
+            
+        tpPoePortTimeRangeName OBJECT-TYPE
+            SYNTAX  OCTET STRING (SIZE (0..255))  
+            MAX-ACCESS  read-write
+            STATUS  current
+            DESCRIPTION
+                    "Select time range by entering its name."
+            ::= { tpPoePortConfigEntry 5 } 
+            
+        tpPoePortProfileName OBJECT-TYPE
+            SYNTAX  OCTET STRING (SIZE (0..255))  
+            MAX-ACCESS  read-write
+            STATUS  current
+            DESCRIPTION
+                    "Select profile by entering its name. "
+            ::= { tpPoePortConfigEntry 6 }  
+        tpPoePower OBJECT-TYPE
+            SYNTAX  INTEGER(1..300)
+            MAX-ACCESS  read-only
+            STATUS  current
+            DESCRIPTION
+                    " Displays the port's real time power supply in 0.1W."
+            ::= { tpPoePortConfigEntry 7 }
+        tpPoeCurrent OBJECT-TYPE
+            SYNTAX  INTEGER(1..1000)
+            MAX-ACCESS  read-only
+            STATUS  current
+            DESCRIPTION
+                    " Displays the port's real time current in 1mA."
+            ::= { tpPoePortConfigEntry 8 }
+        tpPoeVoltage OBJECT-TYPE
+            SYNTAX  INTEGER(1..300)
+            MAX-ACCESS  read-only
+            STATUS  current
+            DESCRIPTION
+                    " Displays the port's real time voltage in 0.1V."
+            ::= { tpPoePortConfigEntry 9 } 
+        tpPoeClass OBJECT-TYPE
+            SYNTAX      INTEGER
+            {
+                     class0(0),
+                     class1(1),
+                     class2(2),
+                     class3(3),
+                     class4(4),
+                     class-not-defined(7)
+            }
+            MAX-ACCESS  read-only
+            STATUS  current
+            DESCRIPTION
+                    " Displays the class the linked PD (Powered Device) belongs to."
+            ::= { tpPoePortConfigEntry 10 }   
+        tpPoePowerStatus OBJECT-TYPE
+            SYNTAX      INTEGER
+            {
+                    off(0),
+                    turning-on(1),
+					on(2),
+                    overload(3),
+                    short(4),
+                    nonstandard-pd(5),
+                    voltage-high(6),
+                    voltage-low(7),
+                    hardware-fault(8),
+                    overtemperature(9)
+            }
+
+            MAX-ACCESS  read-only
+            STATUS  current
+            DESCRIPTION
+                    " Displays the port's real time power status."
+            ::= { tpPoePortConfigEntry 11 }
+			
+-- (2) tpPoeProfile Objects
+       tpPoeProfileTable OBJECT-TYPE
+            SYNTAX  SEQUENCE OF POEPROFILEENTRY
+            MAX-ACCESS  not-accessible
+            STATUS  current
+            DESCRIPTION
+                    "A list of PoE profile entries.
+                     Here you can define the PoE profile."
+            ::= { tpPoeProfile 1 }     
+            
+            tpPoeProfileEntry OBJECT-TYPE
+            SYNTAX  POEPROFILEENTRY
+            MAX-ACCESS  not-accessible
+            STATUS  current
+            DESCRIPTION
+                    "An entry contains of the information of PoE profile."
+            INDEX   { tpPoeProfileIndex  }
+            ::= { tpPoeProfileTable 1 }
+
+            
+            POEPROFILEENTRY ::=
+            SEQUENCE {
+                                tpPoeProfileIndex        
+                                        INTEGER,            
+                                tpPoeProfileName
+                                        OCTET STRING (SIZE (0..255)), 
+                                tpPoeProfilePortStatus
+                                        INTEGER,
+                                tpPoeProfilePriority
+                                        INTEGER,
+                                tpPoeProfilePowerLimit  
+                                        INTEGER                              
+                    }
+            tpPoeProfileIndex OBJECT-TYPE
+              SYNTAX  INTEGER  
+                MAX-ACCESS  read-only
+                STATUS  current
+                DESCRIPTION
+                    "The index number of the Switch."
+              ::= { tpPoeProfileEntry 1 }
+                      
+            tpPoeProfileName OBJECT-TYPE
+              SYNTAX  OCTET STRING (SIZE (0..255))   
+              MAX-ACCESS  read-only
+              STATUS  current
+              DESCRIPTION
+                      " the name of PoE profile."
+              ::= { tpPoeProfileEntry 2 } 
+              
+            tpPoeProfilePortStatus OBJECT-TYPE
+            SYNTAX  INTEGER{
+                disable(0),                         
+                enable(1)                       
+                }
+            MAX-ACCESS  read-only
+            STATUS  current
+            DESCRIPTION
+                    "Select to disable/enable the PoE feature
+                     for the corresponding profile. If set enable,
+                     the port selected the profile can supply power to
+                      the linked PD (Powered Device)."
+            ::= { tpPoeProfileEntry 3 }
+            tpPoeProfilePriority OBJECT-TYPE
+             SYNTAX  INTEGER{
+                high(0),                        
+                middle(1),
+                low(2)                      
+                }
+            MAX-ACCESS  read-only
+            STATUS  current
+            DESCRIPTION
+                    "Cooperates with the Power Disconnected Method
+                     to decide the way to supply power to the new 
+                     linked PD (Powered Device) when the surplus 
+                     power is inadequate."
+            ::= { tpPoeProfileEntry 4 }
+            tpPoeProfilePowerLimit OBJECT-TYPE
+            SYNTAX  INTEGER(1..300)
+            MAX-ACCESS  read-only
+            STATUS  current
+            DESCRIPTION
+                    "Defines the max power the corresponding port can supply.The unit is 0.1W."
+            ::= { tpPoeProfileEntry 5 } 
+ 			
+--  (3) tpPoeTimeRange Objects
+		  -------------------- delete the old time range module
+          --   tpPoeTimeSegmentConfig        OBJECT IDENTIFIER ::= {tpPoeTimeRange 1}  
+		  --	tpPoeHolidayConfig            OBJECT IDENTIFIER ::= {tpPoeTimeRange 2} 
+		  --------------------
+		  -- new time-range
+			tpTimeRangeConfig        OBJECT IDENTIFIER ::= {tpPoeTimeRange 1}  
+			tpHolidayConfig          OBJECT IDENTIFIER ::= {tpPoeTimeRange 2} 
+	
+		 --(3.1 tpPoeTimeSegmentConfigTable)   old
+			tpPoeTimeSegmentConfigTable OBJECT-TYPE
+            SYNTAX  SEQUENCE OF POETIMESEGMENTCONFIGENTRY
+            MAX-ACCESS  not-accessible
+            STATUS  current
+            DESCRIPTION
+                    "A list of PoE entries.
+                     Here you can configure the PoE time segment."
+            ::= { tpPoeTimeSegmentConfig 1 }
+
+            tpPoeTimeSegmentConfigEntry OBJECT-TYPE
+            SYNTAX  POETIMESEGMENTCONFIGENTRY
+            MAX-ACCESS  not-accessible
+            STATUS  current
+            DESCRIPTION
+                    "An entry contains of the information of PoE time segment."
+            INDEX   { tpPoeTimeSegmentIndex  }
+            ::= { tpPoeTimeSegmentConfigTable 1 }
+    
+        POETIMESEGMENTCONFIGENTRY ::=
+            SEQUENCE {        
+                                tpPoeTimeSegmentIndex
+                                        INTEGER,            
+                                tpPoeTimeSegmentName
+                                        OCTET STRING (SIZE (0..255)), 
+                                tpPoeTimeSegmentExcludeHoliday
+                                        INTEGER,
+                                tpPoeTimeSegmentStartTime
+                                        OCTET STRING (SIZE (0..255)),
+                                tpPoeTimeSegmentEndTime  
+                                        OCTET STRING (SIZE (0..255)), 
+                                tpPoeTimeRangeWeekday
+                                        OCTET STRING (SIZE (0..255)),
+                                tpPoeTimeSegmentStartDate
+                                        OCTET STRING (SIZE (0..255)),
+                                tpPoeTimeSegmentEndDate  
+                                        OCTET STRING (SIZE (0..255)) 
+            }
+        tpPoeTimeSegmentIndex OBJECT-TYPE
+            SYNTAX  INTEGER  
+            MAX-ACCESS  read-only
+            STATUS  current
+            DESCRIPTION
+                    "Index of the time-range for time identification."
+            ::= { tpPoeTimeSegmentConfigEntry 1 }
+    
+        tpPoeTimeSegmentName OBJECT-TYPE
+            SYNTAX  OCTET STRING (SIZE (0..255))  
+            MAX-ACCESS  read-only
+            STATUS  current
+            DESCRIPTION
+                    "The name of the time-range for time identification."
+            ::= { tpPoeTimeSegmentConfigEntry 2 }
+        
+        tpPoeTimeSegmentExcludeHoliday OBJECT-TYPE
+            SYNTAX  INTEGER{
+                include(0),                         
+                exclude(1)                      
+                }
+            MAX-ACCESS  read-only
+            STATUS  current
+            DESCRIPTION
+                    "Select Exclude Holiday to configure time-range. The port based
+                     on this time-range may not supply power when the system time is
+                      within the holiday."
+            ::= { tpPoeTimeSegmentConfigEntry 3 }
+       
+       tpPoeTimeSegmentStartTime OBJECT-TYPE
+            SYNTAX  OCTET STRING (SIZE (0..255))
+            MAX-ACCESS  read-only
+            STATUS  current
+            DESCRIPTION
+                    "The start time of the time-slice in the format HH:MM."
+            ::= { tpPoeTimeSegmentConfigEntry 4 }
+       tpPoeTimeSegmentEndTime OBJECT-TYPE
+            SYNTAX  OCTET STRING (SIZE (0..255))
+            MAX-ACCESS  read-only
+            STATUS  current
+            DESCRIPTION
+                    "The end time of the time-slice in the format HH:MM."
+            ::= { tpPoeTimeSegmentConfigEntry 5 }  
+            
+        tpPoeTimeRangeWeekday OBJECT-TYPE
+            SYNTAX  OCTET STRING (SIZE (0..255))  
+            MAX-ACCESS  read-only
+            STATUS  current
+            DESCRIPTION
+                    "The weekday."
+            ::= { tpPoeTimeSegmentConfigEntry 6 } 
+            
+        tpPoeTimeSegmentStartDate OBJECT-TYPE
+            SYNTAX  OCTET STRING (SIZE (0..255))  
+            MAX-ACCESS  read-only
+            STATUS  current
+            DESCRIPTION
+                    "The start date in the format MM/DD/YYYY. "
+            ::= { tpPoeTimeSegmentConfigEntry 7 } 
+        
+        tpPoeTimeSegmentEndDate OBJECT-TYPE
+            SYNTAX  OCTET STRING (SIZE (0..255))  
+            MAX-ACCESS  read-only
+            STATUS  current
+            DESCRIPTION
+                    "The end date in the format MM/DD/YYYY. "
+            ::= { tpPoeTimeSegmentConfigEntry 8 }
+            
+            --(3.2 tpPoeHolidayConfigTable) old
+        tpPoeHolidayConfigTable OBJECT-TYPE
+            SYNTAX  SEQUENCE OF POEHOLIDAYCONFIGENTRY
+            MAX-ACCESS  not-accessible
+            STATUS  current
+            DESCRIPTION
+                    "A list of PoE Holiday entries.
+                     Here you can configure the PoE Holiday."
+            ::= { tpPoeHolidayConfig 1 }     
+            
+            tpPoeHolidayConfigEntry OBJECT-TYPE
+            SYNTAX  POEHOLIDAYCONFIGENTRY
+            MAX-ACCESS  not-accessible
+            STATUS  current
+            DESCRIPTION
+                    "An entry s of the information of PoE holiday."
+            INDEX   { tpPoeHolidayIndex  }
+            ::= { tpPoeHolidayConfigTable 1 }
+
+            
+            POEHOLIDAYCONFIGENTRY ::=
+            SEQUENCE {        
+                                tpPoeHolidayIndex
+                                        INTEGER,            
+                                tpPoeHolidayName
+                                        OCTET STRING (SIZE (0..255)), 
+                                tpPoeHolidayStartDate
+                                        OCTET STRING (SIZE (0..255)),
+                                tpPoeHolidayEndDate
+                                        OCTET STRING (SIZE (0..255))
+                    }
+            tpPoeHolidayIndex OBJECT-TYPE
+              SYNTAX  INTEGER   
+              MAX-ACCESS  read-only
+              STATUS  current
+              DESCRIPTION
+                      "Index of PoE holiday name."
+              ::= { tpPoeHolidayConfigEntry 1 }
+                        
+            tpPoeHolidayName OBJECT-TYPE
+              SYNTAX  OCTET STRING (SIZE (0..255))   
+              MAX-ACCESS  read-only
+              STATUS  current
+              DESCRIPTION
+                      "The name of PoE holiday name."
+              ::= { tpPoeHolidayConfigEntry 2 } 
+              
+            tpPoeHolidayStartDate OBJECT-TYPE
+            SYNTAX  OCTET STRING (SIZE (0..255))
+            MAX-ACCESS  read-only
+            STATUS  current
+            DESCRIPTION
+                    "The start date in the format MM/DD."
+            ::= { tpPoeHolidayConfigEntry 3}
+            tpPoeHolidayEndDate OBJECT-TYPE
+            SYNTAX  OCTET STRING (SIZE (0..255))
+            MAX-ACCESS  read-only
+            STATUS  current
+            DESCRIPTION
+                    "The end date in the format MM/DD. "
+            ::= { tpPoeHolidayConfigEntry 4 }
+            
+            --(3.3 tpTimeRangeConfig) 
+			tpTimeRangeConfigTable OBJECT-TYPE
+            SYNTAX  SEQUENCE OF TIMERANGECONFIGENTRY
+            MAX-ACCESS  not-accessible
+            STATUS  current
+            DESCRIPTION
+                    "A list of time range entries.
+                     Here you can configure the time segment."
+            ::= { tpTimeRangeConfig 1 }
+
+            tpTimeRangeConfigEntry OBJECT-TYPE
+            SYNTAX  TIMERANGECONFIGENTRY
+            MAX-ACCESS  not-accessible
+            STATUS  current
+            DESCRIPTION
+                    "An entry contains of the information of  time segment."
+            INDEX   { tpTimeRangeIndex  }
+            ::= { tpTimeRangeConfigTable 1 }
+    
+        TIMERANGECONFIGENTRY ::=
+            SEQUENCE {        
+                                tpTimeRangeIndex
+                                        INTEGER,            
+                                tpTimeRangeName
+                                        OCTET STRING (SIZE (0..255)), 
+                                tpTimeRangeExcludeHoliday
+                                        INTEGER, 
+								 tpTimeRangeAbsoluteTime
+                                        OCTET STRING (SIZE (0..511)),
+                                tpTimeRangePeriodicTime  
+                                        OCTET STRING (SIZE (0..511))
+            }
+			
+        tpTimeRangeIndex OBJECT-TYPE
+            SYNTAX  INTEGER  
+            MAX-ACCESS  read-only
+            STATUS  current
+            DESCRIPTION
+                    "Index of the time-range for time identification."
+            ::= { tpTimeRangeConfigEntry 1 }
+    
+        tpTimeRangeName OBJECT-TYPE
+            SYNTAX  OCTET STRING (SIZE (0..255))  
+            MAX-ACCESS  read-only
+            STATUS  current
+            DESCRIPTION
+                    "The name of the time-range for time identification."
+            ::= { tpTimeRangeConfigEntry 2 }
+        
+        tpTimeRangeExcludeHoliday OBJECT-TYPE
+            SYNTAX  INTEGER{
+                include(0),                         
+                exclude(1)                      
+                }
+            MAX-ACCESS  read-only
+            STATUS  current
+            DESCRIPTION
+                    "config time-range include or exclude holiday"
+            ::= { tpTimeRangeConfigEntry 3 }
+			
+			tpTimeRangeAbsoluteTime OBJECT-TYPE
+            SYNTAX  OCTET STRING (SIZE (0..511))
+            MAX-ACCESS  read-only
+            STATUS  current
+            DESCRIPTION
+                    "The absolute time list, the format for each item is YYYY/MM/DD-hhmm to YYYY/MM/DD-hhmm "
+            ::= { tpTimeRangeConfigEntry 4 }
+			
+			tpTimeRangePeriodicTime OBJECT-TYPE
+            SYNTAX  OCTET STRING (SIZE (0..511))
+            MAX-ACCESS  read-only
+            STATUS  current
+            DESCRIPTION
+                    "The periodic time list, the format for each item is HH:MM-HH:MM on 'specific day of the week' "
+            ::= { tpTimeRangeConfigEntry 5 }			
+			
+            -- (3.4 tpHolidayConfig)
+			tpHolidayConfigTable OBJECT-TYPE
+            SYNTAX  SEQUENCE OF HOLIDAYCONFIGENTRY
+            MAX-ACCESS  not-accessible
+            STATUS  current
+            DESCRIPTION
+                    "A list of Holiday entries. Here you can configure the Holiday."
+            ::= { tpHolidayConfig 1 }   
+            
+            tpHolidayConfigEntry OBJECT-TYPE
+            SYNTAX HOLIDAYCONFIGENTRY
+            MAX-ACCESS  not-accessible
+            STATUS  current
+            DESCRIPTION
+                    "An entry s of the information of holiday."
+            INDEX   { tpHolidayIndex  }
+            ::= { tpHolidayConfigTable 1 }
+
+            
+            HOLIDAYCONFIGENTRY ::=
+            SEQUENCE {        
+                                tpHolidayIndex
+                                        INTEGER,            
+                                tpHolidayName
+                                        OCTET STRING (SIZE (0..255)), 
+                                tpHolidayStartDate
+                                        OCTET STRING (SIZE (0..255)),
+                                tpHolidayEndDate
+                                        OCTET STRING (SIZE (0..255))
+                    }
+            tpHolidayIndex OBJECT-TYPE
+              SYNTAX  INTEGER   
+              MAX-ACCESS  read-only
+              STATUS  current
+              DESCRIPTION
+                      "Index of holiday name."
+              ::= { tpHolidayConfigEntry 1 }
+                        
+            tpHolidayName OBJECT-TYPE
+              SYNTAX  OCTET STRING (SIZE (0..255))   
+              MAX-ACCESS  read-only
+              STATUS  current
+              DESCRIPTION
+                      "The name of PoE holiday name."
+              ::= { tpHolidayConfigEntry 2 } 
+              
+            tpHolidayStartDate OBJECT-TYPE
+            SYNTAX  OCTET STRING (SIZE (0..255))
+            MAX-ACCESS  read-only
+            STATUS  current
+            DESCRIPTION
+                    "The start date in the format MM/DD."
+            ::= { tpHolidayConfigEntry 3}
+			
+            tpHolidayEndDate OBJECT-TYPE
+            SYNTAX  OCTET STRING (SIZE (0..255))
+            MAX-ACCESS  read-only
+            STATUS  current
+            DESCRIPTION
+                    "The end date in the format MM/DD. "
+            ::= { tpHolidayConfigEntry 4 }  
+            
+    --  (4) poeNotifications Objects	
+		tpPoePortPowerChange NOTIFICATION-TYPE
+                        OBJECTS
+                        {
+                            tpPoePortIndex,
+                            tpPoePortStatus
+                        }
+                        STATUS current
+                        DESCRIPTION 
+                            "A poePortPowerChange notification is sent when the status of a port power changes."
+                        ::= {tplinkPoeNotifications 1}
+                        
+                    tpPoePortPowerOverLoading NOTIFICATION-TYPE
+                        OBJECTS
+                        {
+                            tpPoePortIndex
+                        }
+                        STATUS current
+                        DESCRIPTION 
+                            "A poePortPowerOverLoading notification is sent when a port is over loading."
+                        ::= {tplinkPoeNotifications 2}
+                        
+                    tpPoePortShortCircuit NOTIFICATION-TYPE
+                        OBJECTS
+                        {
+                            tpPoePortIndex
+                        }
+                        STATUS current
+                        DESCRIPTION 
+                            "A poePortShortCircuit notification is sent when short circuit occurs on a port."
+                        ::= {tplinkPoeNotifications 3}
+                        
+                    tpPoePortPowerOver30Watts NOTIFICATION-TYPE
+                        OBJECTS
+                        {
+                            tpPoePortIndex
+                        }
+                        STATUS current
+                        DESCRIPTION 
+                            "A poePortPowerOver30Watts notification is sent when a port's consumption is over 30W."
+                        ::= {tplinkPoeNotifications 4}
+                    
+                    tpPoePortPowerDeny NOTIFICATION-TYPE
+                        OBJECTS
+                        {
+                            tpPoePortIndex
+                        }
+                        STATUS current
+                        DESCRIPTION 
+                            "A poePowerDeny notification is sent when a port's power supply is denied."
+                        ::= {tplinkPoeNotifications 5}
+                        
+                    tpPoeThermalShutdown NOTIFICATION-TYPE
+                        OBJECTS
+                        {
+							tpPoePortIndex -- an dummpy object, for compile pass
+                        }
+                        STATUS current
+                        DESCRIPTION 
+                            "A poeThermalShutdown notification is sent when the power supply shutdown occurs because temperature is too high."
+                        ::= {tplinkPoeNotifications 6}
+                        
+                    tpPoeOverMaxPowerBudget NOTIFICATION-TYPE 
+                        OBJECTS
+                        {
+                            tpSystemPowerLimit
+                        }
+                        STATUS current
+                        DESCRIPTION 
+                            "A poeOverMaxPowerBudget notification is sent when the total power is over the budget."
+                        ::= {tplinkPoeNotifications 7}
+END
+
+	
+	
+	
+	
+	
+	
+	
+	
