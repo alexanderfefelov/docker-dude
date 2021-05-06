@@ -2,7 +2,7 @@ FROM ubuntu:20.04
 
 ENV DUDE_VERSION=4.0beta3
 
-ENV DUDE_STUFF=dude-install-$DUDE_VERSION.exe
+ARG DUDE_STUFF=dude-install-$DUDE_VERSION.exe
 
 COPY installer/$DUDE_STUFF /
 
