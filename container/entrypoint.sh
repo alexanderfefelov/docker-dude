@@ -1,6 +1,6 @@
 #!/bin/bash
 
-rm --force /tmp/.X$DISPLAY-lock
+rm --force /tmp/.X${DISPLAY:1}-lock
 
 Xvfb &
 # Prevents Wine from prompting for Mono and Gecko
